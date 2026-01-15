@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -29,6 +30,7 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
+import coil.compose.AsyncImage
 
 class MainActivity : ComponentActivity() {
 
@@ -71,16 +73,29 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun ModelCard(model: Model, modifier: Modifier = Modifier) {
     Card(modifier = modifier) {
-        Text(
-            text = model.id,
-            style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.padding(4.dp)
-        )
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .padding(4.dp)) {
+            AsyncImage(
+                model = "https://example.com/image.jpg",
+                contentDescription = "model image",
+                modifier = Modifier.size(16.dp)
+            )
+            Text(
+                text = model.id,
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier.padding(4.dp)
+            )
+        }
         Row(modifier = Modifier.padding(4.dp)) {
             Text(text = "Tags :")
             model.tags.forEach { Text(text = " <$it> ") }
         }
-        Row(modifier = Modifier.padding(4.dp).fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+        Row(
+            modifier = Modifier
+                .padding(4.dp)
+                .fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween
+        ) {
             Text(text = "${model.likes}♥")
             Text(text = "${model.createdAt}⏰")
         }

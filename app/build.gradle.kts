@@ -77,6 +77,11 @@ dependencies {
     implementation(libs.ktor.client.content.negotiation)
     implementation(libs.ktor.serialization.kotlinx.json)
 
+    // PAGING
     implementation(libs.paging)
     implementation(libs.paging.compose)
+
+    //COIL
+    implementation(libs.coil.kt)
+    implementation(libs.coil.compose)
 }
